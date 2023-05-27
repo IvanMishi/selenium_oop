@@ -41,12 +41,12 @@ Pom-файл хранит список всех библиотек (зависи
 
 Аналогично сделаем с библиотекой Junit (будем использовать версию 4.13.2).
 
-//<dependency>
+<dependency>
        <groupId>junit</groupId>
        <artifactId>junit</artifactId>
        <version>4.13.2</version>
        <scope>test</scope>
-</dependency>//
+</dependency>
 
 Итоговый pom-файл:
 
