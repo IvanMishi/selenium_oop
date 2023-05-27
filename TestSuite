@@ -16,9 +16,11 @@ public class TEST {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    @Before
+    @Before //Инструкции до выполнения теста
     public void setUp() {
-        //Для тестирования используется Chrome Browser, путь к файлу chromedriver с помощью метода set property, chromedriver должен быть помещен в директориию drivers, если директоиия отсутствуеь жмкем правой кнопкой мыши по главной директоии проекта =>new direcrory => drivers
+        //Для тестирования используется Chrome Browser, путь к файлу chromedriver с помощью метода set property, 
+        chromedriver должен быть помещен в директориию drivers, 
+        если директория отсутствует жмем правой кнопкой мыши по главной директоии проекта и выбираем => new direcrory => drivers //
         System.setProperty("chromedriver", "drivers");
         //Если требуется подключение VPN, можно использовать vpn  как плагин Google Chrome
         ChromeOptions options = new ChromeOptions();
@@ -32,7 +34,7 @@ public class TEST {
         //Явные ожидания
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
-    @After //Иеструкции после выполнения теста
+    @After //Инструкции после выполнения теста
     public void tearDown() {
         driver.quit();// Закрыть браузер после выполнения теста
     }
