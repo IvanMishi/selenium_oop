@@ -38,6 +38,6 @@ public class TEST {
     public void tearDown() {
         driver.quit();// Закрыть браузер после выполнения теста
     }
-    //generalLocator - общие локаторы которые будут использованы в каждом из тестов
+    //generalLocator - Общие локаторы которые будут использованы в каждом из тестов
     private By searchLocator = By.className("gLFyf");//Локатор строки поиска google
     private By searchBtnLocator = By.className("gNO89b");//Локатор кнопки поиска google
