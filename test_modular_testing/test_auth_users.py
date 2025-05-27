@@ -18,7 +18,7 @@ class TestAuth:
         print('Запуск теста авторизации стандартного пользователя')
         self.login_page.authorization(standard_user)  # Выполняем авторизацию стандартного пользователя
 
-
+# Создаем экземпляр класса и вызываем его методы:
 start_test = TestAuth()
 start_test.test_standard_user_login()
 
@@ -43,9 +43,8 @@ start_test.test_standard_user_login()
 #         # Здесь должна быть реализация API или UI для авторизации
 #         pass
 #
-# # Создаем экземпляр класса и вызываем его методы:
 
-# Создаем экземпляр класса и вызываем его методы:
+
 
 
 
