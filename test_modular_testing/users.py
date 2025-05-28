@@ -3,6 +3,7 @@ class User:
         self.username = username
         self.password = password
 
+
 # Определение пользователей
 standard_user = User(username='standard_user', password='secret_sauce')
 locked_out_user = User(username='locked_out_user', password='secret_sauce')
