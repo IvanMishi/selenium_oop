@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By  # Модуль для опреде�
 from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
 from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
 
-
 class LoginPage:
     def __init__(self, driver):  # Передаем драйвер как параметр
         self.driver = driver  # Инициализируем драйвер
@@ -22,11 +21,15 @@ class LoginPage:
             # Кликаем по кнопке логина
             button_login = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.ID, "login-button")))
             button_login.click()
-            print('Авторизация прошла успешно')
-
             time.sleep(2)
 
-            # Дополнительные проверки или действия после успешного входа могут быть добавлены здесь
+            if self.driver.find_element(By.CLASS_NAME, 'title').text == 'Products':
+                print('Авторизация прошла успешно')
+            elif self.driver.find_element(By.CLASS_NAME, 'error-button').is_displayed():
+                print('Авторизация не выполнена')
 
+
+
+            # Дополнительные проверки или действия после успешного входа могут быть добавлены здесь
         except Exception as e:
             print(f'Произошла ошибка при авторизации: {e}')

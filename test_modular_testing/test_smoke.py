@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from faker import Faker
 from tests.login_page import Login_page
 
+
 class TestSmoke:
     """Класс, включающий сценарий проверки авторизации в системе"""
 
@@ -35,26 +36,29 @@ class TestSmoke:
         self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
         self.wait_until_visible(By.CLASS_NAME, "title")
         assert self.driver.find_element(By.CLASS_NAME, "title").text == 'Your Cart', 'Переход в корзину не выполнен'
-        
+
         quantity = [int(i.text) for i in self.driver.find_elements(By.CSS_SELECTOR, '[data-test="item-quantity"]')]
         assert sum(quantity) == 2, 'Количество товаров в корзине некорректно'
 
         for price in expected_item_prices:
-            assert price in [float(item.text.split('$')[1]) for item in self.driver.find_elements(By.CLASS_NAME, "inventory_item_price")], 'Стоимость товаров не совпадает'
+            assert price in [float(item.text.split('$')[1]) for item in self.driver.find_elements(By.CLASS_NAME,
+                                                                                                  "inventory_item_price")], 'Стоимость товаров не совпадает'
 
     def fill_checkout_form(self):
         """Заполняет форму оформления заказа"""
         self.driver.find_element(By.ID, "checkout").click()
         self.wait_until_visible(By.CSS_SELECTOR, '[data-test="title"]')
-        assert self.driver.find_element(By.CSS_SELECTOR, '[data-test="title"]').text == 'Checkout: Your Information', 'Переход на страницу заполнения полей о заказчике не выполнен'
-        
+        assert self.driver.find_element(By.CSS_SELECTOR,
+                                        '[data-test="title"]').text == 'Checkout: Your Information', 'Переход на страницу заполнения полей о заказчике не выполнен'
+
         inputs = self.driver.find_elements(By.CSS_SELECTOR, '[class="input_error form_input"]')
         for input_field in inputs:
             input_field.send_keys(self.fake.first_name())  # Или любую другую информацию
 
         self.driver.find_element(By.ID, "continue").click()
         self.wait_until_visible(By.CLASS_NAME, "cart_quantity_label")
-        assert self.driver.find_element(By.CLASS_NAME, "cart_quantity_label").text == 'QTY', 'Переход на страницу с подтверждением заказа не выполнен'
+        assert self.driver.find_element(By.CLASS_NAME,
+                                        "cart_quantity_label").text == 'QTY', 'Переход на страницу с подтверждением заказа не выполнен'
 
     def test_smoke_path(self):
         """Основной тестовый метод"""
@@ -64,12 +68,15 @@ class TestSmoke:
 
         # Проверка суммы товаров
         total_price = sum(item_prices)
-        assert total_price == float(self.driver.find_element(By.CLASS_NAME, "summary_subtotal_label").text.split('$')[1]), 'Сумма товаров некорректна'
-        
+        assert total_price == float(self.driver.find_element(By.CLASS_NAME, "summary_subtotal_label").text.split('$')[
+                                        1]), 'Сумма товаров некорректна'
+
         print('Нажимает кнопку "Finish" для завершения заказа...')
         self.driver.find_element(By.ID, "finish").click()
         self.wait_until_visible(By.CLASS_NAME, 'complete-header')
-        assert self.driver.find_element(By.CLASS_NAME,'complete-header').text == 'Thank you for your order!', 'Ошибка: форма не отправлена, не найден элемент с подтверждающим текстом'
+        assert self.driver.find_element(By.CLASS_NAME,
+                                        'complete-header').text == 'Thank you for your order!', 'Ошибка: форма не отправлена, не найден элемент с подтверждающим текстом'
+
 
 # Создаем экземпляр класса и вызываем его методы
 test = TestSmoke()
