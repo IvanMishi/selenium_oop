@@ -9,3 +9,7 @@ standard_user = User(username='standard_user', password='secret_sauce')
 locked_out_user = User(username='locked_out_user', password='secret_sauce')
 problem_user = User(username='problem_user', password='secret_sauce')
 performance_glitch_user = User(username='performance_glitch_user', password='secret_sauce')
+error_user = User(username='error_user', password='secret_sauce')
+visual_user = User(username='visual_user', password='secret_sauce')
+
+
