@@ -1,15 +1,15 @@
-from users import standard_user, locked_out_user, problem_user, performance_glitch_user # Импортирует пользователей из модуля .
-from setup_driver import SetupDriver # Импортирует класс с настройками драйвера
-from login_page import LoginPage  # Импортируем класс авторизации
+from users import standard_user, locked_out_user, problem_user, performance_glitch_user # Импортирует пользователей.
+from setup_driver import SetupDriver # Импортирует класс с настройками драйвера.
+from login_page import LoginPage  # Импортируем класс для авторизации.
 
 
-# Абстракция
+
 class TestAuth:
-    """Класс, включающий сценарий тестирования авторизации в системе"""
+    """Класс тестирования авторизации в системе"""
     def __init__(self):
-        self.set = SetupDriver()  # Создает экземпляр класса SetupDriver
-        self.driver = self.set.setup_driver()  # Получаем настроенный драйвер
-        self.login_page = LoginPage(self.driver)  # Передаем драйвер в LoginPage
+        self.set = SetupDriver()  # Создает экземпляр класса SetupDriver из модуля setup_driver
+        self.driver = self.set.setup_driver()  # Получает настройки драйвера.
+        self.login_page = LoginPage(self.driver)  # Передает драйвер в LoginPage.
 
     def test_standard_user_login(self):
         """Метод для тестирования авторизации стандартного пользователя"""

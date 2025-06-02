@@ -1,7 +1,7 @@
 import time
 from selenium.webdriver.common.by import By  # Модуль для определения способов поиска элементов на странице
 from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
-from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
+from selenium.webdriver.support import expected_conditions as EC # Модуль для работы с ожидаемыми условиями
 from selenium.common.exceptions import NoSuchElementException
 
 
