@@ -1,36 +1,58 @@
-import time
-from selenium.webdriver.common.by import By  # Модуль для определения способов поиска элементов на странице
-from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
-from selenium.webdriver.support import expected_conditions as EC # Модуль для работы с ожидаемыми условиями
-from selenium.common.exceptions import NoSuchElementException
+import time  # Импорт модуля для работы со временем (паузы, задержки)
+from selenium.webdriver.common.by import By  # Импорт класса для указания способов поиска элементов (ID, CLASS_NAME и т.д.)
+from selenium.webdriver.support.ui import WebDriverWait  # Импорт класса для реализации явных ожиданий
+from selenium.webdriver.support import expected_conditions as EC  # Импорт набора предопределенных условий для ожидания
+from selenium.common.exceptions import NoSuchElementException  # Импорт исключения для обработки отсутствия элементов
 
 
 class LoginPage:
-    """Метод для авторизации на сайте."""
-    def __init__(self, driver):  # Передает драйвер как параметр
-        self.driver = driver  # Инициализирует драйвер
+    """Класс, описывающий страницу авторизации и её функциональность."""
+    
+    def __init__(self, driver):  # Конструктор класса
+        self.driver = driver  # Инициализация экземпляра веб-драйвера
 
     def authorization(self, user):
-        """Метод для авторизации на сайте."""
+        """Метод выполнения процедуры авторизации."""
+        
+        # Шаг 1: Вывод информационного сообщения
         print('Незарегистрированный пользователь авторизуется в системе')
+        
+        # Шаг 2: Ожидание появления и заполнение поля логина
         print('Вводит имя пользователя')
-        input_username = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "user-name")))
-        input_username.send_keys(user.username)
+        # Ожидание 10 секунд до появления элемента с ID "user-name"
+        input_username = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "user-name"))
+        )
+        input_username.send_keys(user.username)  # Ввод логина из объекта пользователя
+        
+        # Шаг 3: Ожидание появления и заполнение поля пароля
         print('Вводит пароль')
-        input_password = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "password")))
-        input_password.send_keys(user.password)
+        # Ожидание 10 секунд до появления элемента с ID "password"
+        input_password = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "password"))
+        )
+        input_password.send_keys(user.password)  # Ввод пароля из объекта пользователя
+        
+        # Шаг 4: Клик по кнопке авторизации
         print('Нажимает кнопку отправки формы авторизации')
-        button_login = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.ID, "login-button")))
-        button_login.click()
-        time.sleep(2)
-        # Проверяет успешность авторизации.
+        # Ожидание 10 секунд до кликабельности кнопки с ID "login-button"
+        button_login = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "login-button"))
+        )
+        button_login.click()  # Выполнение клика
+        
+        time.sleep(2)  # Принудительная пауза для стабилизации страницы (не рекомендуется для production)
+        
+        # Шаг 5: Проверка результата авторизации
         try:
-            # Если элемент найден, то переход на страницу сайта выполнил
-            if self.driver.find_element(By.CLASS_NAME, 'title').is_displayed() and self.driver.find_element(By.CLASS_NAME, 'title').text == 'Products':
+            # Поиск элемента с классом 'title' (заголовок страницы)
+            title_element = self.driver.find_element(By.CLASS_NAME, 'title')
+            # Проверка двух условий: элемент отображается И текст соответствует 'Products'
+            if title_element.is_displayed() and title_element.text == 'Products':
                 print('Авторизация прошла успешно')
-                return True
-        except NoSuchElementException:
-            # Если появился элемент оповещающий об ошибке, то авторизация не пройдена
+                return True  # Успешная авторизация
+        except NoSuchElementException:  # Обработка случая, когда элемент не найден
+            # Проверка наличия элемента ошибки (кнопка закрытия ошибки)
             if self.driver.find_element(By.CLASS_NAME, 'error-button').is_displayed():
                 print('Авторизация не выполнена — неверное имя пользователя или пароль')
-                return False
+                return False  # Авторизация провалена
