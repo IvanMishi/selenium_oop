@@ -1,4 +1,4 @@
-1. Модуль login_page.py
+# 1. Модуль login_page.py
 
 Назначение: Реализация страницы авторизации и логики входа в систему.
 
@@ -15,7 +15,7 @@ LoginPage
 Проверка результата:
 Успех: наличие заголовка "Products"
 Ошибка: наличие элемента с сообщением об ошибке
-2. Модуль setup_driver.py
+# 2. Модуль setup_driver.py
 
 Назначение: Настройка и управление веб-драйвером.
 
@@ -29,7 +29,7 @@ SetupDriver
 Открывает браузер, переходит на заданный URL и ожидает полной загрузки страницы.
 Метод close_driver(self)
 Корректно закрывает браузер и освобождает ресурсы.
-3. Модуль users.py
+# 3. Модуль users.py
 
 Назначение: Создание тестовых пользователей.
 
@@ -46,18 +46,19 @@ standard_user = User('standard_user', 'secret_sauce')
 locked_out_user = User('locked_out_user', 'secret_sauce')
 problem_user = User('problem_user', 'secret_sauce')
 performance_glitch_user = User('performance_glitch_user', 'secret_sauce')
-4. Модуль test_auth.py
 
+# 4. Модуль test_auth.py
 Назначение: Запуск тестов авторизации для разных пользователей.
 
 Классы:
-
 TestAuth
 Организует процесс тестирования.
 Инициализация __init__(self)
+
 Создает:
 Экземпляр SetupDriver (настраивает браузер)
 Экземпляр LoginPage (для работы со страницей входа)
+
 Методы тестирования:
 test_standard_user_login(): Тест для стандартного пользователя
 test_locked_out_user_login(): Тест для заблокированного пользователя
