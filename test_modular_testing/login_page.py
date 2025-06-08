@@ -7,43 +7,31 @@ from selenium.common.exceptions import NoSuchElementException  # Импорт и
 
 class LoginPage:
     """Класс, описывающий страницу авторизации и её функциональность."""
-    
+
     def __init__(self, driver):  # Конструктор класса
         self.driver = driver  # Инициализация экземпляра веб-драйвера
 
     def authorization(self, user):
         """Метод выполнения процедуры авторизации."""
-        
-        # Шаг 1: Вывод информационного сообщения
+
         print('Незарегистрированный пользователь авторизуется в системе')
-        
-        # Шаг 2: Ожидание появления и заполнение поля логина
         print('Вводит имя пользователя')
-        # Ожидание 10 секунд до появления элемента с ID "user-name"
-        input_username = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.ID, "user-name"))
-        )
+        # Ожидает 10 секунд до появления элемента с ID "user-name"
+        input_username = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "user-name")))
         input_username.send_keys(user.username)  # Ввод логина из объекта пользователя
-        
-        # Шаг 3: Ожидание появления и заполнение поля пароля
+
         print('Вводит пароль')
-        # Ожидание 10 секунд до появления элемента с ID "password"
-        input_password = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.ID, "password"))
-        )
+        # Ожидает 10 секунд до появления элемента с ID "password"
+        input_password = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "password")))
         input_password.send_keys(user.password)  # Ввод пароля из объекта пользователя
-        
-        # Шаг 4: Клик по кнопке авторизации
+
         print('Нажимает кнопку отправки формы авторизации')
-        # Ожидание 10 секунд до кликабельности кнопки с ID "login-button"
-        button_login = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "login-button"))
-        )
+        # Ожидает 10 секунд до кликабельности кнопки с ID "login-button"
+        button_login = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.ID, "login-button")))
         button_login.click()  # Выполнение клика
-        
-        time.sleep(2)  # Принудительная пауза для стабилизации страницы (не рекомендуется для production)
-        
-        # Шаг 5: Проверка результата авторизации
+
+
+        # Проверка результата авторизации
         try:
             # Поиск элемента с классом 'title' (заголовок страницы)
             title_element = self.driver.find_element(By.CLASS_NAME, 'title')
@@ -55,4 +43,4 @@ class LoginPage:
             # Проверка наличия элемента ошибки (кнопка закрытия ошибки)
             if self.driver.find_element(By.CLASS_NAME, 'error-button').is_displayed():
                 print('Авторизация не выполнена — неверное имя пользователя или пароль')
-                return False  # Авторизация провалена
+                return False  # Авторизация не выполнена
