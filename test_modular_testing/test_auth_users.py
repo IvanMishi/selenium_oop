@@ -15,37 +15,13 @@ class TestAuth:
         self.login_page = LoginPage(self.driver)  # Создает объект страницы авторизации, передавая драйвер.
 
 
-    def test_standard_user_login(self):
-        """Метод для тестирования авторизации стандартного пользователя"""
+    def autorization_users(self):
+        """Метод для тестирования авторизации  пользователей"""
         print('Запуск теста авторизации стандартного пользователя')  # Выводит сообщение о начале теста.
-        self.login_page.authorization(standard_user) # Пытается авторизовать стандартного пользователя.
-        self.set.close_driver()  # Закрывает браузер после завершения теста.
-
-    def test_locked_out_user_login(self):
-        """Метод для тестирования авторизации заблокированного пользователя"""
-        print('Запуск теста авторизации заблокированного пользователя') # Выводит сообщение о начале теста для проблемного пользователя.
-        self.login_page.authorization(locked_out_user) # Пытается авторизовать проблемного пользователя.
-        self.set.close_driver() # Закрывает браузер после завершения теста.
-
-    def test_problem_user_login(self):
-        """Метод для тестирования авторизации проблемного пользователя"""
-        print('Запуск теста авторизации проблемного пользователя') # Выводит сообщение о начале теста для глючного пользователя.
-        self.login_page.authorization(problem_user) # Пытается авторизовать глючного пользователя.
-        self.set.close_driver()  # Закрывает браузер после завершения теста.
-
-    def performance_glitch_user(self):
-        """Метод для тестирования авторизации глючного пользователя"""
-        print('Запуск теста авторизации глючного пользователя')
-        self.login_page.authorization(performance_glitch_user)
-        self.set.close_driver()  # Закрывает браузер после завершения теста.
+        self.login_page.authorization(users) # Пытается авторизовать каждого пользователя.
+        self.set.close_driver()  # Закрывает браузер после завершения каждого теста.
 
 
-# Создает экземпляр класса TestAuth и запускает тесты:
+# Создает экземпляр класса TestAuth и запускает тест:
 start_test = TestAuth()  # Создает объект тестирования.
-start_test.test_standard_user_login()  # Запускает тест для стандартного пользователя.
-start_test = TestAuth()  # Создает новый объект тестирования.
-start_test.test_locked_out_user_login()  # Запускает тест для заблокированного пользователя.
-start_test = TestAuth()  # Создает новый объект тестирования.
-start_test.test_problem_user_login()  # Запускает тест для проблемного пользователя.
-start_test = TestAuth()  # Создает новый объект тестирования.
-start_test.performance_glitch_user()  # Запускает тест для глючного пользователя.
+start_test.autorization_users()  # Запускает тест для авторизации пользователя.
