@@ -1,4 +1,4 @@
-from users import standard_user, locked_out_user, problem_user, performance_glitch_user # Импортирует различные типы пользователей.
+from users import * # Импортирует различные типы пользователей.
 from setup_driver import SetupDriver # Импортирует класс с настройками драйвера.
 from login_page import LoginPage  # Импортируем класс для авторизации.
 
@@ -17,8 +17,8 @@ class TestAuth:
 
     def autorization_users(self):
         """Метод для тестирования авторизации  пользователей"""
-        print('Запуск теста авторизации стандартного пользователя')  # Выводит сообщение о начале теста.
-        self.login_page.authorization(users) # Пытается авторизовать каждого пользователя.
+        print('Запуск теста авторизации пользователя')  # Выводит сообщение о начале теста.
+        self.login_page.authorization(User) # Пытается авторизовать каждого пользователя.
         self.set.close_driver()  # Закрывает браузер после завершения каждого теста.
 
 
