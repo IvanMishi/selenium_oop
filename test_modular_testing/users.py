@@ -6,7 +6,7 @@ class User:
     def __init__(self, username, password):
         # Инициализация объекта пользователя
         self.username = 'standard_user'  # Логин пользователя
-        self.password = 'secret_sauce'  # Пароль пользователя
+        self.password = 'secret_sauce'  # Пароль по умолчанию для всех пользователей
 
 # # Создание тестовых пользователей с разными характеристиками:
 #
