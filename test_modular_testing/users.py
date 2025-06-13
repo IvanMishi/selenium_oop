@@ -1,17 +1,12 @@
-class User:
-    """
-    Класс для представления пользователя системы.
-    Хранит учетные данные: имя пользователя и пароль.
-    """
-    def __init__(self, username, password):
-        # Инициализация объекта пользователя
-        self.username = 'standard_user'  # Логин пользователя
-        self.password = 'secret_sauce'  # Пароль по умолчанию для всех пользователей
+class User:  # Класс пользователей
+    def __init__(self, username, password='secret_sauce'):  # Конструктор
+        self.username = username # Инициализация логина
+        self.password = password # Инициализация пароля (значение по умолчанию)
 
-# # Создание тестовых пользователей с разными характеристиками:
-#
-# user = ['standard_user', # Стандартный пользователь с валидными данными
-#         'locked_out_user', # Заблокированный в системе пользователь
-#         'problem_user', # Пользователь с проблемными данными (специфичные баги)
-#         'performance_glitch_user'
-#         ]
+# Список тестовых пользователей
+users = [
+    User(username='standard_user'),      # Стандартный
+    User(username='locked_out_user'),    # Заблокированный
+    User(username='problem_user'),       # Проблемный
+    User(username='performance_glitch_user')  # С замедлениями
+]
