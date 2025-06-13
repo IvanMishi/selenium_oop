@@ -1,22 +1,18 @@
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver  # Импорт веб-драйвера
+from selenium.webdriver.support.ui import WebDriverWait  # Импорт ожидания
+from selenium.webdriver.support import expected_conditions as EC  # Импорт условий
 
+class SetupDriver:  # Класс настройки драйвера
+    def __init__(self):  # Конструктор
+        self.driver = webdriver.Chrome() # Инициализация драйвера Chrome
+        self.base_url = 'https://www.saucedemo.com/' # URL тестового сайта
 
-class SetupDriver:
-    def __init__(self):
-        """Инициализация драйвера"""
-        self.driver = webdriver.Chrome() # Создает экземпляр ChromeDriver при инициализации объекта
-        self.link = 'https://www.saucedemo.com/' # URL тестируемого приложения
+    def setup_driver(self):  # Метод настройки
+        self.driver.get(self.base_url) # Открытие базового URL
+        WebDriverWait(self.driver, 30).until(EC.url_to_be(self.base_url)) # Ожидание загрузки URL
+        WebDriverWait(self.driver, 30).until(EC.title_contains("Swag Labs")) # Ожидание появления заголовка
+        return self.driver  # Возврат драйвера
 
-    def setup_driver(self):
-        """Настройка драйвера"""
-        self.driver.get(self.link) # Переходит по ссылке
-        WebDriverWait(self.driver, 30).until(EC.url_to_be(self.link)) # Ожидает загрузку конкретного URL (до 30 секунд)
-        WebDriverWait(self.driver, 30).until(EC.title_contains("Swag Labs")) # Ожидае заголовок, с текстом "Swag Labs"
-        return self.driver # Возвращает настроенный драйвер для использования в других частях программы
-
-    def close_driver(self):
-        """Безопасное завершение"""
-        print('Браузер закрыт\n')
-        self.driver.quit() # Закрывает браузер и освобождает ресурсы.
+    def close_driver(self):  # Метод закрытия
+        print('Браузер закрыт')
+        self.driver.quit()  # Корректное завершение работы драйвера
