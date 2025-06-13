@@ -1,6 +1,7 @@
-from users import * # Импортирует различные типы пользователей.
-from setup_driver import SetupDriver # Импортирует класс с настройками драйвера.
-from login_page import LoginPage  # Импортируем класс для авторизации.
+from users import users  # Импортируем список пользователей
+from setup_driver import SetupDriver
+from login_page import LoginPage
+import time
 
 
 class TestAuth:
@@ -14,12 +15,23 @@ class TestAuth:
         self.driver = self.set.setup_driver()  # Получает настройки драйвера.
         self.login_page = LoginPage(self.driver)  # Создает объект страницы авторизации, передавая драйвер.
 
-
     def autorization_users(self):
-        """Метод для тестирования авторизации  пользователей"""
-        print('Запуск теста авторизации пользователя')  # Выводит сообщение о начале теста.
-        self.login_page.authorization(User) # Пытается авторизовать каждого пользователя.
-        self.set.close_driver()  # Закрывает браузер после завершения каждого теста.
+        """Метод для тестирования авторизации всех пользователей"""
+        print('Запуск теста авторизации пользователей')
+
+        for user in users:
+            print(f'\n--- Тестирование пользователя: {user.username} ---')
+
+            # Выполняем авторизацию для текущего пользователя
+            self.login_page.authorization(user)
+
+            # Возвращаемся на страницу авторизации для следующего теста
+            self.driver.get("https://www.saucedemo.com/")
+            time.sleep(1)  # Небольшая пауза для стабилизации
+
+        # Закрываем браузер после всех тестов
+        self.set.close_driver()
+        print("Все тесты завершены")
 
 
 # Создает экземпляр класса TestAuth и запускает тест:
