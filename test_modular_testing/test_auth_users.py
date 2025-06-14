@@ -1,7 +1,7 @@
 import time  # Импорт модуля для работы со временем
 from users import users  # Импорт списка пользователей из модуля users
 from setup_driver import SetupDriver  # Импорт класса SetupDriver
-from login_page import LoginPage  # Импорт класса LoginPage
+from logining_page import LoginPage  # Импорт класса LoginPage
 
 
 class TestAuth:  # Объявление класса для тестирования авторизации
