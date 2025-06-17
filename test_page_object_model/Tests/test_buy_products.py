@@ -11,10 +11,10 @@ from Pages.login_page import LoginPage
 
 
 
-def test_buy_products(self):
-    self.driver = webdriver.Chrome()
+def test_buy_products():
+    driver = webdriver.Chrome()
     # fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
-    login = LoginPage(self.driver) # Создает экземпляр родительского класса
+    login = LoginPage(driver) # Создает экземпляр родительского класса
     login.autorization_user() # Вызывает его метод
 
 
