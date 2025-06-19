@@ -15,7 +15,7 @@ def test_buy_products():
     driver = webdriver.Chrome()
     # fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
     login = LoginPage(driver) # Создает экземпляр родительского класса
-    login.autorization_user() # Вызывает его метод
+    login.authorization_user() # Вызывает его метод
 
 
     # print(f'Находит список товаров на странице')
