@@ -3,12 +3,13 @@ from selenium import webdriver  # Модуль для взаимодействи
 from selenium.webdriver.common.by import By  # Модуль для определения способов поиска элементов на странице
 from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
 from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
+
 from faker import Faker # Импортируем класс Faker из установленной библиотеки
+# fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
+
+import pytest
 
 from Pages.login_page import LoginPage
-
-
-
 
 
 def test_buy_products():
