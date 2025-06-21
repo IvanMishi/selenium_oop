@@ -10,41 +10,25 @@ from faker import Faker # Импортируем класс Faker из уста�
 import pytest
 
 from Pages.login_page import LoginPage
-
+from Pages.main_page import MainPage
 
 def test_buy_products():
     driver = webdriver.Chrome()
     # fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
+
+    # Тест авторизации на сайте
     login = LoginPage(driver) # Создает экземпляр родительского класса
     login.authorization_user() # Вызывает его метод
+    # Тест выбора товаров на главной странице и добавления в корзину
+    mp = MainPage(driver)
+    mp.click_item_list_product()
+    time.sleep(10)
 
 
-    # print(f'Находит список товаров на странице')
-    # list_item = driver.find_elements(By.CLASS_NAME, "inventory_item")
-    # print(f'Добавляет 2 первых товара из списка в козину ')
-    # item_name = []
-    # item_price = []
-    # for item in list_item[:2]:
-    #     print(f'Сохраняет названия добавляемых товаров')
-    #     item_name.append(item.find_element(By.CLASS_NAME, "inventory_item_name").text)
-    #     print(f'Сохраняет стоимость добавляемых товаров')
-    #     item_price.append(float(item.find_element(By.CLASS_NAME, "inventory_item_price").text.split('$')[1]))
-    #     print('Находит кнопку для переход в корзину и нажимает на нее')
-    #     item.find_element(By.CLASS_NAME, "btn").click()
 
 
-    # print('Переходит в корзину')
-    # button_shopping_cart = driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-    # print('Убеждается что переход в корзину с товарами выполнен')
-    # assert driver.find_element(By.CLASS_NAME, "title").text == 'Your Cart', f'Переход в корзину не выполнен'
-    # time.sleep(2)
-    # #
-    # # print('Убеждается, что в корзине товаров добавлено - 2 шт')
-    # quantity = []
-    # for i in driver.find_elements(By.CSS_SELECTOR, '[data-test="item-quantity"]'):
-    #     quantity.append(int(i.text))
-    # assert sum(quantity) == 2, f'Количество товаров в корзине не корректно'
-    # time.sleep(2)
+
+
     #
     # print('Сравнивает товары в корзине с добавленными')
     # print("Имена товаов совпадают" if float(
