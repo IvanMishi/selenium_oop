@@ -58,4 +58,5 @@ class MainPage(Base): # Наследование - класс потомок (в
         self.get_current_url()
         self.click_item_list_product() # Выбирает первые два товара
         self.click_button_shopping_cart() # Нажимает на кнопку перехода в корзину
+        self.assert_word(self.get_title_value(),'Your Cart')  # Вызов метода для подтверждения авторизации на сайте, resulе - значение с которым сравнивается.
 

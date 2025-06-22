@@ -4,25 +4,37 @@ from selenium.webdriver.common.by import By  # Модуль для опреде�
 from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
 from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
 
-from faker import Faker # Импортируем класс Faker из установленной библиотеки
-# fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
+
 
 import pytest
 
+from Pages.cart_page import CartPage
+from Pages.client_Info_page import ClientInfoPage
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
 
 def test_buy_products():
     driver = webdriver.Chrome()
-    # fake = Faker("ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
+
 
     # Тест авторизации на сайте
     login = LoginPage(driver) # Создает экземпляр родительского класса
     login.authorization_user() # Вызывает его метод
+
     # Тест выбора товаров на главной странице и добавления в корзину
-    mp = MainPage(driver)
-    mp.click_item_list_product()
-    time.sleep(10)
+    mp = MainPage(driver) # Создает экземпляр родительского класса
+    mp.click_item_list_product() # Вызывает его метод
+
+    # Тест подтверждения товаров в корзине
+    cp = CartPage(driver) # Создает экземпляр родительского класса
+    cp.product_confirmation() # Вызывает его метод
+
+    # Тест заполнения данными о клиенте
+    cip = ClientInfoPage*(driver) # Создает экземпляр родительского класса
+    cip.input_client_information() # Вызывает его метод
+
+
+
 
 
 
@@ -38,16 +50,7 @@ def test_buy_products():
     #     driver.find_element(By.CLASS_NAME, "inventory_item_price").text.split('$')[
     #         1]) in item_price else "Стоимость товаров не совпадает")
     #
-    # print('Переходит к заполнению данными о клиенте')
-    # button_checkout = driver.find_element(By.ID, "checkout").click()
-    # print('Убеждается, что переход к заполению данными о клиенте выполнен')
-    # assert driver.find_element(By.CSS_SELECTOR,
-    #                            '[data-test = "title"]').text == 'Checkout: Your Information', f'Переход на сраниу с заполнением полей о заказчике не выполнен'
-    # time.sleep(2)
-    #
-    # print('Заполняет поля данными о заказчике')
-    # for i in driver.find_elements(By.CSS_SELECTOR, '[class="input_error form_input"]'):
-    #     i.send_keys(fake.random_letter())
+
     #
     # print('Переходит к подтверждению заказа')
     # button_continue = driver.find_element(By.ID, "continue").click()
