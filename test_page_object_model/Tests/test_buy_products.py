@@ -10,8 +10,11 @@ import pytest
 
 from Pages.cart_page import CartPage
 from Pages.client_Info_page import ClientInfoPage
+from Pages.finish_page import FinishPage
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
+from Pages.payment_page import PaymentPage
+
 
 def test_buy_products():
     driver = webdriver.Chrome()
@@ -30,9 +33,16 @@ def test_buy_products():
     cp.product_confirmation() # Вызывает его метод
 
     # Тест заполнения данными о клиенте
-    cip = ClientInfoPage*(driver) # Создает экземпляр родительского класса
+    cip = ClientInfoPage(driver) # Создает экземпляр родительского класса
     cip.input_client_information() # Вызывает его метод
 
+    # Тест подтверждения оплаты
+    pp = PaymentPage(driver)
+    pp.click_button_finish()
+
+    # Тест скриншот
+    fp = FinishPage(driver)
+    fp.get_screenshot()
 
 
 
