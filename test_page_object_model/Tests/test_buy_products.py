@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC  # Модуль
 
 
 import pytest
-
 from Pages.cart_page import CartPage
 from Pages.client_Info_page import ClientInfoPage
 from Pages.finish_page import FinishPage
@@ -16,10 +15,11 @@ from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
 
 
-def test_buy_products():
+
+
+def test_buy_products_1():
+    print('Тест 1 запущен')
     driver = webdriver.Chrome()
-
-
     # Тест авторизации на сайте
     login = LoginPage(driver) # Создает экземпляр родительского класса
     login.authorization_user() # Вызывает его метод
@@ -32,17 +32,62 @@ def test_buy_products():
     cp = CartPage(driver) # Создает экземпляр родительского класса
     cp.product_confirmation() # Вызывает его метод
 
-    # Тест заполнения данными о клиенте
-    cip = ClientInfoPage(driver) # Создает экземпляр родительского класса
-    cip.input_client_information() # Вызывает его метод
+    # # Тест заполнения данными о клиенте
+    # cip = ClientInfoPage(driver) # Создает экземпляр родительского класса
+    # cip.input_client_information() # Вызывает его метод
+    #
+    # # Тест подтверждения оплаты
+    # pp = PaymentPage(driver)
+    # pp.click_button_finish()
+    #
+    # # Тест скриншот
+    # fp = FinishPage(driver)
+    # fp.get_screenshot()
 
-    # Тест подтверждения оплаты
-    pp = PaymentPage(driver)
-    pp.click_button_finish()
+    print('Тест 1 завершен')
+    driver.quit()
 
-    # Тест скриншот
-    fp = FinishPage(driver)
-    fp.get_screenshot()
+
+
+
+def test_buy_products_2():
+    print('Тест 2 запущен')
+    driver = webdriver.Chrome()
+    # Тест авторизации на сайте
+    login = LoginPage(driver)  # Создает экземпляр родительского класса
+    login.authorization_user()  # Вызывает его метод
+
+    # Тест выбора товаров на главной странице и добавления в корзину
+    mp = MainPage(driver)  # Создает экземпляр родительского класса
+    mp.click_item_list_product()  # Вызывает его метод
+
+    # Тест подтверждения товаров в корзине
+    cp = CartPage(driver)  # Создает экземпляр родительского класса
+    cp.product_confirmation()  # Вызывает его метод
+
+    print('Тест 2 завершен')
+    driver.quit()
+
+
+
+
+def test_buy_products_3():
+    print('Тест 3 запущен')
+    driver = webdriver.Chrome()
+    # Тест авторизации на сайте
+    login = LoginPage(driver)  # Создает экземпляр родительского класса
+    login.authorization_user()  # Вызывает его метод
+
+    # Тест выбора товаров на главной странице и добавления в корзину
+    mp = MainPage(driver)  # Создает экземпляр родительского класса
+    mp.click_item_list_product()  # Вызывает его метод
+
+    # Тест подтверждения товаров в корзине
+    cp = CartPage(driver)  # Создает экземпляр родительского класса
+    cp.product_confirmation()  # Вызывает его метод
+
+    print('Тест 3 завершен')
+    driver.quit()
 
 
 

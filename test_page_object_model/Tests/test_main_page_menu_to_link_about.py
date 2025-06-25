@@ -16,7 +16,7 @@ from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
 
 
-def test_menu_to_link_about_link():
+def test_main_page_menu_to_link_about():
     driver = webdriver.Chrome()
 
 
