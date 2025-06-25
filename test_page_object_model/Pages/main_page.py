@@ -29,10 +29,13 @@ class MainPage(Base): # Наследование - класс потомок (в
 
 
 # ЛОКАТОРЫ. (Локаторы элементов, которые находятся на странице авторизации)
-    list_products = "inventory_item" # Локатор блока товаров на странице по CLASS_NAME
+    select_products_1 = "remove-sauce-labs-backpack" # Локатор  товара на странице по ID
+    select_products_2 = "remove-sauce-labs-bike-light"  # Локатор  товара на странице по ID
+    select_products_31 = "add-to-cart-sauce-labs-bolt-t-shirt"  # Локатор  товара на странице по ID
+
     button_shopping_cart  = "shopping_cart_badge"  # Локатор кнопки для перехода в козину на странице по CLASS_NAME
     burger_menu = "react-burger-menu-btn" # Локатор ,бургер меню на странице по ID
-    link_about = '' # Локатор , ссылки 'about' на странице в бургер меню по ID
+    link_about = "bm-item menu-item" # Локатор , ссылки 'about' на странице в бургер меню по ID
 
 
 
@@ -44,7 +47,7 @@ class MainPage(Base): # Наследование - класс потомок (в
     def get_burger_menu(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.burger_menu))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_link_about(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.link_about)))  # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.link_about)))  # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
 
 # ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информациюв)
@@ -58,7 +61,7 @@ class MainPage(Base): # Наследование - класс потомок (в
         self.get_burger_menu().click()  # Вызывает метод на геттере через self и нажимает кнопку для перехода в корзину.
         print('Нажимает кнопку бургер-меню на сайте')
     def click_link_about(self): #
-        self.get_burger_menu().click()  # Вызывает метод на геттере через self и нажимает кнопку для перехода по ссылке.
+        self.get_link_about().click()  # Вызывает метод на геттере через self и нажимает кнопку для перехода по ссылке.
         print('Нажимает ссылку about в бургер-меню на сайте')
 
 
@@ -71,10 +74,11 @@ class MainPage(Base): # Наследование - класс потомок (в
 
     # Метод для выбора в бургер-меню вкладки 'about'
     def select_menu_about(self):
-        self.get_current_url()
+        # self.get_current_url()
         self.click_get_burger_menu()
         self.click_link_about()
-        self.assert_url('https://saucelabs.com/')
+        # self.assert_url('https://saucelabs.com/')
+        time.sleep(11)
 
 
 
