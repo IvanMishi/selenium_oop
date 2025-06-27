@@ -82,7 +82,7 @@ class MainPage(Base): # Наследование - класс потомок (в
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     # Метод для выбора продуктов
     def select_products_to_cart_1(self):
-        self.get_current_url()
+        # self.get_current_url()
         self.click_select_products_1()
         self.click_button_shopping_cart() #
         time.sleep(2)
