@@ -3,10 +3,12 @@ from selenium import webdriver  # Модуль для взаимодействи
 
 
 import pytest
+from Pages.login_page import LoginPage
+
 from Pages.cart_page import CartPage
 from Pages.client_Info_page import ClientInfoPage
 from Pages.finish_page import FinishPage
-from Pages.login_page import LoginPage
+
 from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
 from Tests.conftes import set_up
