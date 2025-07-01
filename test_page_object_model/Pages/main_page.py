@@ -6,26 +6,13 @@ from selenium.common.exceptions import NoSuchElementException  # Импорт и
 from Base.base_class import Base
 
 class MainPage(Base): # Наследование - класс потомок (вызвает методы родителя, драйвер)
-    """ Класс содержащий локаторы и методы для страницы Авторизации"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
+    """ Класс содержащий локаторы и методы для страницы 'Main'"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
 
 
     # Конструктор __init__, в целом Мы можем его не использовать, так как сам driver у нас будет подтягиваться из теста, но он может понадобиться, на случай необходимости использовать новые переменные которые будут использоваться в разных классах.
     def __init__(self, driver):
         super().__init__(driver) # Указывает, что это потомок класса
         self.driver = driver
-
-
-
-    # print('Убеждается что переход в корзину с товарами выполнен')
-    # assert driver.find_element(By.CLASS_NAME, "title").text == 'Your Cart', f'Переход в корзину не выполнен'
-    # time.sleep(2)
-    # #
-    # # print('Убеждается, что в корзине товаров добавлено - 2 шт')
-    # quantity = []
-    # for i in driver.find_elements(By.CSS_SELECTOR, '[data-test="item-quantity"]'):
-    #     quantity.append(int(i.text))
-    # assert sum(quantity) == 2, f'Количество товаров в корзине не корректно'
-    # time.sleep(2)
 
 
 # ЛОКАТОРЫ. (Локаторы элементов, которые находятся на странице авторизации)
@@ -37,7 +24,7 @@ class MainPage(Base): # Наследование - класс потомок (в
 
     burger_menu = "react-burger-menu-btn" # Локатор ,бургер меню на странице по ID
     link_about = "bm-item menu-item" # Локатор , ссылки 'about' на странице в бургер меню по ID
-
+    title_element = "title" # Локатор на странице указывающий на класс title.
 
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
@@ -55,6 +42,8 @@ class MainPage(Base): # Наследование - класс потомок (в
     def get_link_about(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.link_about)))  # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
+    def get_title_value(self):
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.title_element))) # Ищет title на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
 # ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информациюв)
     def click_select_products_1(self):
@@ -82,9 +71,10 @@ class MainPage(Base): # Наследование - класс потомок (в
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     # Метод для выбора продуктов
     def select_products_to_cart_1(self):
-        # self.get_current_url()
+        self.get_current_url()
         self.click_select_products_1()
         self.click_button_shopping_cart() #
+        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
         time.sleep(2)
 
     def select_products_to_cart_2(self):
@@ -94,7 +84,7 @@ class MainPage(Base): # Наследование - класс потомок (в
         time.sleep(2)
 
     def select_products_to_cart_3(self):
-        # self.get_current_url()
+        self.get_current_url()
         self.click_select_products_3() # Выбирает первый товар
         self.click_button_shopping_cart() # Нажимает на кнопку перехода в корзину
         time.sleep(2)

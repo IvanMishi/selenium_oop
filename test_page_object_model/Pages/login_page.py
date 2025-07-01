@@ -19,7 +19,7 @@ class LoginPage(Base): # Наследование методов от Base
     username = "user-name" # Локатор на странице по ID.
     password = "password" # Локатор на странице по ID.
     login_button = "login-button" # Локатор на странице по ID.
-    title_element = 'title' # Локатор на странице указывающий на класс title.
+    title_element = "title" # Локатор на странице указывающий на класс title.
 
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
@@ -52,6 +52,5 @@ class LoginPage(Base): # Наследование методов от Base
         self.input_username('standard_user')# Вызов действия ввода данных о логине стандартного пользователя.
         self.input_password('secret_sauce')  # Вызов действия ввода данных пароля для стандартного пользователя.
         self.click_login_button() # Вызов действия нажатия на кнопку авторизации на сайте.
-
-        # self.assert_word(self.get_title_value(),'Products' ) # Вызов метода для подтверждения авторизации на сайте, resulе - значение с которым сравнивается.
+        self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
         print('Авторизован')

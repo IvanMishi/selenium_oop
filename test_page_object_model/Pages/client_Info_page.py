@@ -4,34 +4,23 @@ from selenium.webdriver.support.ui import WebDriverWait  # Импорт явно
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
 from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from Base.base_class import Base
-from faker import Faker # Импортируем класс Faker из установленной библиотеки
 
 
-class ClientInfoPage(Base): # Наследование - класс потомок (вызвает методы родителя, драйвер)
-    """ Класс содержащий локаторы и методы для страницы заполнения данными о клиенте'"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
+class ClientInfoPage(Base): # Наследование - класс потомок (Вызывает методы родителя)
+    """ Класс содержащий локаторы и методы для страницы заполнения данными о клиенте"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
 
 
-    # Конструктор __init__, в целом Мы можем его не использовать, так как сам driver у нас будет подтягиваться из теста, но он может понадобиться, на случай необходимости использовать новые переменные которые будут использоваться в разных классах.
+    # Конструктор __init__
     def __init__(self, driver):
-        super().__init__(driver) # Указывает, что это потомок класса
+        super().__init__(driver) # Указывает, что это потомок класса.
         self.driver = driver
-        fake = Faker(
-            "ru_Ru")  # Создаём экземпляр класса Faker, указывая, что хотим генерировать данные на (ru_Ru - русский язык)
-
-
-    #
-    # print('Заполняет поля данными о заказчике')
-    # for i in driver.find_elements(By.CSS_SELECTOR, '[class="input_error form_input"]'):
-    #     i.send_keys(fake.random_letter())
-
-
 
 
 # ЛОКАТОРЫ. (Локаторы элементов, которые находятся на странице авторизации)
-    first_name = "first-name" # Локатор на странице по ID .
-    last_name = "last-name" # Локатор на странице по ID .
-    postal_code = "postal-code" # Локатор на странице по ID .
-    button_continue = "continue"  # Локатор на странице по ID .
+    first_name = "first-name" # Локатор на странице по ID.
+    last_name = "last-name" # Локатор на странице по ID.
+    postal_code = "postal-code" # Локатор на странице по ID.
+    button_continue = "continue"  # Локатор на странице по ID.
 
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
@@ -42,32 +31,30 @@ class ClientInfoPage(Base): # Наследование - класс потомо
     def get_postal_code(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.postal_code))) # Ищет поле на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_button_continue(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.button_continue))) # Ищет поле на странице по указанному локатору вне метода через self и возвращает его значение далее.
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.button_continue))) # Ищет кнопку на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
 
-# ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информациюв)
-    def input_first_name(self, first_name): # Функция принимает значение username. Оно передается  при перечислении самих шагов теста, для использования разных тестовых данных.
-        self.get_first_name.send_keys(first_name) # Вызывает метод на геттера через self и вводит данные.
+# ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информацию.)
+    def input_first_name(self, first_name): # Функция принимает значение username. Оно передается при перечислении самих шагов теста, для использования разных тестовых данных.
+        self.get_first_name().send_keys(first_name) # Вызывает метод на геттера через self и вводит данные.
         print('Заполняет поле именем клиента')
-    def input_last_name(self, last_name):  # Функция принимает значение password. Оно передается  при перечислении самих шагов теста, для использования разных тестовых данных.
+    def input_last_name(self, last_name):  # Функция принимает значение password. Оно передается при перечислении самих шагов теста, для использования разных тестовых данных.
         self.get_last_name().send_keys(last_name) # Вызывает метод на геттера через self и вводит данные.
         print('Заполняет поле фамилией клиента')
-    def input_postal_code(self, postal_code):  # Функция принимает значение password. Оно передается  при перечислении самих шагов теста, для использования разных тестовых данных.
-        self.get_last_name().send_keys(postal_code) # Вызывает метод на геттера через self и вводит данные.
-        print('Заполняет поле zip code')
+    def input_postal_code(self, postal_code):  # Функция принимает значение password. Оно передается при перечислении самих шагов теста, для использования разных тестовых данных.
+        self.get_postal_code().send_keys(postal_code) # Вызывает метод на геттера через self и вводит данные.
+        print('Заполняет поле почтовый индекс')
     def click_button_continue(self):
         self.get_button_continue().click() # Вызывает метод на геттере через self и нажимает кнопку.
         print('Нажимает кнопку продолжить после заполнения полей клиентскими данными')
 
 
-
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def input_client_information(self):
         self.get_current_url()
-        self.input_first_name(self.fake.random_letter())
-        self.input_last_name(self.fake.random_letter())
-        self.input_postal_code(self.fake.random_letter())
+        self.input_first_name(self.fake.first_name())
+        self.input_last_name(self.fake.last_name())
+        self.input_postal_code(self.fake.port_number())
         self.click_button_continue()
-
-
+        time.sleep(10)
 
