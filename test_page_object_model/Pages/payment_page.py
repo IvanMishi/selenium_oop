@@ -1,8 +1,8 @@
 import time  # Импорт модуля времени
+from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from selenium.webdriver.common.by import By  # Импорт стратегий поиска
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from Base.base_class import Base
 
 class PaymentPage(Base): # Наследование - класс потомок (вызвает методы родителя, драйвер)
@@ -15,16 +15,15 @@ class PaymentPage(Base): # Наследование - класс потомок 
         self.driver = driver
 
 
-
-
 # ЛОКАТОРЫ. (Локаторы элементов, которые находятся на странице авторизации)
     button_finish = "finish" # Локатор кнопки оплаты товаров на странице по ID.
-
+    title_element = "title" # Локатор на странице указывающий на класс title.
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
     def get_button_finish(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_all_elements_located((By.ID, self.button_finish))) # Ищет кнопку оплаты товаров на странице по указанному локатору вне метода через self и возвращает его значение далее.
-
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.ID, self.button_finish))) # Ищет кнопку оплаты товаров на странице по указанному локатору вне метода через self и возвращает его значение далее.
+    def get_title_value(self):
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.title_element)))  # Ищет title на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
 # ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информациюв)
     def click_button_finish(self):
@@ -36,5 +35,5 @@ class PaymentPage(Base): # Наследование - класс потомок 
     def select_product(self):
         self.get_current_url()
         self.click_button_finish() # Нажимает кнопку подтверждения оплаты товара.
-        self.assert_word(self.get_title_value(),'Your Cart')  # Вызов метода для подтверждения авторизации на сайте, resulе - значение с которым сравнивается.
+        self.assert_word(self.get_title_value(), 'Checkout: Complete!')  # Убеждается, что переход на страницу выполнен
 

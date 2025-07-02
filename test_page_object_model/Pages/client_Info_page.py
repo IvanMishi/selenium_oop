@@ -1,8 +1,8 @@
 import time  # Импорт модуля времени
+from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from selenium.webdriver.common.by import By  # Импорт стратегий поиска
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from Base.base_class import Base
 
 
@@ -21,7 +21,7 @@ class ClientInfoPage(Base): # Наследование - класс потомо
     last_name = "last-name" # Локатор на странице по ID.
     postal_code = "postal-code" # Локатор на странице по ID.
     button_continue = "continue"  # Локатор на странице по ID.
-
+    title_element = "title" # Локатор на странице указывающий на класс title.
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
     def get_first_name(self):
@@ -31,8 +31,9 @@ class ClientInfoPage(Base): # Наследование - класс потомо
     def get_postal_code(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.postal_code))) # Ищет поле на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_button_continue(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.button_continue))) # Ищет кнопку на странице по указанному локатору вне метода через self и возвращает его значение далее.
-
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.ID, self.button_continue))) # Ищет кнопку на странице по указанному локатору вне метода через self и возвращает его значение далее.
+    def get_title_value(self):
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.title_element)))  # Ищет title на странице по указанному локатору вне метода через self и возвращает его значение далее.
 
 # ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информацию.)
     def input_first_name(self, first_name): # Функция принимает значение username. Оно передается при перечислении самих шагов теста, для использования разных тестовых данных.
@@ -56,5 +57,5 @@ class ClientInfoPage(Base): # Наследование - класс потомо
         self.input_last_name(self.fake.last_name())
         self.input_postal_code(self.fake.port_number())
         self.click_button_continue()
-        time.sleep(10)
+        self.assert_word(self.get_title_value(), 'Checkout: Overview')  # Убеждается, что переход на страницу выполнен
 
