@@ -1,8 +1,8 @@
 import time  # Импорт модуля времени
+from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from selenium.webdriver.common.by import By  # Импорт стратегий поиска
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from Base.base_class import Base
 
 class CartPage(Base):
