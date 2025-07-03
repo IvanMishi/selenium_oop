@@ -53,4 +53,5 @@ class LoginPage(Base): # Наследование методов от Base
         self.input_password('secret_sauce')  # Вызов действия ввода данных пароля для стандартного пользователя.
         self.click_login_button() # Вызов действия нажатия на кнопку авторизации на сайте.
         self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(self.username)
         print('Авторизован')
