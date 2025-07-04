@@ -3,6 +3,8 @@ from selenium.common.exceptions import NoSuchElementException  # Импорт и
 from selenium.webdriver.common.by import By  # Импорт стратегий поиска
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
+from setuptools.package_index import user_agent
+
 from Base.base_class import Base
 
 
@@ -53,5 +55,5 @@ class LoginPage(Base): # Наследование методов от Base
         self.input_password('secret_sauce')  # Вызов действия ввода данных пароля для стандартного пользователя.
         self.click_login_button() # Вызов действия нажатия на кнопку авторизации на сайте.
         self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
-        self.get_screenshot(self.username)
+        self.get_screenshot(element=self.get_title_value())
         print('Авторизован')
