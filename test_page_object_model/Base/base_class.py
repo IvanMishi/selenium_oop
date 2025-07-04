@@ -1,6 +1,9 @@
 import datetime
+import os
 from faker import Faker # Импортируем класс Faker из установленной библиотеки
 from selenium.webdriver.common.by import By
+from selenium import webdriver  # Модуль для взаимодействия с веб-браузерами
+from selenium.webdriver.remote.webelement import WebElement
 
 
 class Base(): # Базовый класс в котором хранится драйвер, он будет родительским, для всех наших последующих страниц Pages
@@ -46,12 +49,20 @@ class Base(): # Базовый класс в котором хранится д�
 
 
     """ Метод, создание скриншота на странице """
-    def get_screenshot(self, result):
-        now_date = datetime.datetime.now().strftime("%H.%M.%S-%Y.%m.%d")
-        name_screenshot = "screenshot " + now_date + ".png"
-        return self.driver.find_element(By.ID, result).screenshot('Screen/' + name_screenshot)
 
-
+    def get_screenshot(self, element: WebElement = None):
+        """Создание скриншота"""
+        timestamp = datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S")
+        if element:
+            # Скриншот конкретного элемента, который передан в аргументы при вызове.
+            screenshot_name = f"element_screenshot_{timestamp}.png"
+            element.screenshot(f"/Users/unregistreduser/PycharmProjects/PageObjectsModel/Screen/{screenshot_name}")
+            print(f"Скриншот элемента выполнен")
+        else:
+            # Скриншот всей страницы, если в аргументы при вызове ничего не передано.
+            screenshot_name = "screenshot " + timestamp + ".png"
+            self.driver.save_screenshot(f"/Users/unregistreduser/PycharmProjects/PageObjectsModel/Screen/{screenshot_name}")
+            print(f"Скриншот страницы выполнен")
 
 
 
