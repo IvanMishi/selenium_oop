@@ -15,7 +15,6 @@ class FinishPage(Base): # Наследование - класс потомок (
         self.driver = driver
 
 
-
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def finish(self):
         self.get_current_url()
