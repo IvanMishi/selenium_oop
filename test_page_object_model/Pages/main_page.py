@@ -75,23 +75,28 @@ class MainPage(Base): # Наследование - класс потомок (в
         self.click_select_products_1()
         self.click_button_shopping_cart() #
         self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_select_products_1())
         time.sleep(2)
 
     def select_products_to_cart_2(self):
-        # self.get_current_url()
-        self.click_select_products_2() # Выбирает первый товар
-        self.click_button_shopping_cart() # Нажимает на кнопку перехода в корзину
+        self.get_current_url()
+        self.click_select_products_2()
+        self.click_button_shopping_cart() #
+        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_select_products_2())
         time.sleep(2)
 
     def select_products_to_cart_3(self):
         self.get_current_url()
-        self.click_select_products_3() # Выбирает первый товар
-        self.click_button_shopping_cart() # Нажимает на кнопку перехода в корзину
+        self.click_select_products_3()
+        self.click_button_shopping_cart() #
+        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_select_products_3())
         time.sleep(2)
 
     # Метод для выбора в бургер-меню вкладки 'about'
     def select_menu_about(self):
-        # self.get_current_url()
+        self.get_current_url()
         self.click_get_burger_menu()
         self.click_link_about()
         # self.assert_url('https://saucelabs.com/')

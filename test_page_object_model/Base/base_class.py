@@ -49,7 +49,6 @@ class Base(): # Базовый класс в котором хранится д�
 
 
     """ Метод, создание скриншота на странице """
-
     def get_screenshot(self, element: WebElement = None):
         """Создание скриншота"""
         timestamp = datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S")
@@ -63,9 +62,6 @@ class Base(): # Базовый класс в котором хранится д�
             screenshot_name = "screenshot " + timestamp + ".png"
             self.driver.save_screenshot(f"/Users/unregistreduser/PycharmProjects/PageObjectsModel/Screen/{screenshot_name}")
             print(f"Скриншот страницы выполнен")
-
-
-
 
 
 
