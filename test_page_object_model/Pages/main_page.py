@@ -22,8 +22,8 @@ class MainPage(Base): # Наследование - класс потомок (в
 
     button_shopping_cart  = "shopping_cart_link"  # Локатор кнопки для перехода в козину на странице по CLASS_NAME
 
-    burger_menu = "react-burger-menu-btn" # Локатор ,бургер меню на странице по ID
-    link_about = "bm-item menu-item" # Локатор , ссылки 'about' на странице в бургер меню по ID
+    burger_menu = "//button[@id='react-burger-menu-btn']" # Локатор ,бургер меню на странице по ID
+    link_about = "//a[@id='about_sidebar_link']" # Локатор , ссылки 'about' на странице в бургер меню по ID
     title_element = "title" # Локатор на странице указывающий на класс title.
 
 
@@ -38,12 +38,12 @@ class MainPage(Base): # Наследование - класс потомок (в
     def get_button_shopping_cart(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.button_shopping_cart))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_burger_menu(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, self.burger_menu))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, self.burger_menu))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_link_about(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.link_about)))  # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
-
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.link_about)))  # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_title_value(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.title_element))) # Ищет title на странице по указанному локатору вне метода через self и возвращает его значение далее.
+
 
 # ДЕЙСТВИЯ. (Методы, которые будут принимать результат поиска от ГЕТТЕРОВ и производить требуемой действие, например кликать или вводить требуемую информациюв)
     def click_select_products_1(self):
@@ -98,8 +98,9 @@ class MainPage(Base): # Наследование - класс потомок (в
     def select_menu_about(self):
         self.get_current_url()
         self.click_get_burger_menu()
+        time.sleep(3)
         self.click_link_about()
-        # self.assert_url('https://saucelabs.com/')
+        self.assert_url('https://saucelabs.com/')
         time.sleep(11)
 
 
