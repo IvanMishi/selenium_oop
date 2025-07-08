@@ -94,14 +94,11 @@ class MainPage(Base): # Наследование - класс потомок (в
         self.get_screenshot(element=self.get_select_products_3())
         time.sleep(2)
 
-    # Метод для выбора в бургер-меню вкладки 'about'
+    # Метод для перехода по ссылке 'about' в 'бургер меню' на странице 'main_page'
     def select_menu_about(self):
         self.get_current_url()
-        self.click_get_burger_menu()
-        time.sleep(3)
-        self.click_link_about()
-        self.assert_url('https://saucelabs.com/')
-        time.sleep(11)
-
-
-
+        self.click_get_burger_menu() # Нажимает на 'бургер меню'
+        time.sleep(3) # Ждет 3 сек
+        self.click_link_about() # Нажимает на ссылку 'about' и переходит по ней
+        self.assert_url('https://saucelabs.com/') # Убеждается, что переход выполнен
+        time.sleep(3) # Ждет 3 сек
