@@ -8,8 +8,9 @@ from Base.base_class import Base
 class CartPage(Base):
     """ Класс содержащий локаторы и методы для страницы Корзина товаров"""
 
+    # КОНСТРУКТОР __init__
     def __init__(self, driver):
-        super().__init__(driver) # Указывает, что это потомок класса
+        super().__init__(driver)  # 'super' - указывает, что это потомок класса
         self.driver = driver
 
 # ЛОКАТОРЫ. (Локаторы элементов, которые находятся на странице авторизации)
@@ -18,8 +19,7 @@ class CartPage(Base):
 
 # ГЕТТЕРЫ. (Методы, которые будут осуществлять поиск элементов, по ЛОКАТОРАМ, используя определенные условия поиска, и возвращающие результат данного поиска.)
     def get_checkout_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.ID, self.checkout_button)))
-
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.ID, self.checkout_button)))
     def get_title_value(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.title_element))) # Ищет title на странице по указанному локатору вне метода через self и возвращает его значение далее.
 

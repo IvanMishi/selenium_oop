@@ -19,5 +19,5 @@ class FinishPage(Base): # Наследование - класс потомок (
     def finish(self):
         self.get_current_url()
         self.assert_url("https://www.saucedemo.com/inventory.html")
-        self.get_screenshot('e') # Вызов метода для подтверждения авторизации на сайте, resulе - значение с которым сравнивается.
+        self.get_screenshot()
 

@@ -25,28 +25,27 @@ def test_buy_products_1(set_up):
     # Тест авторизации на сайте на странице login_page
     login_page = LoginPage(driver) # Создает экземпляр родительского класса
     login_page.authorization_user() # Вызывает его метод
+    time.sleep(3)
+    # Тест выбора товара на странице main_page и добавления в корзину
+    main_page = MainPage(driver) # Создает экземпляр родительского класса
+    main_page.select_products_to_cart_1() # Вызывает его метод
+    time.sleep(3)
+    # Тест подтверждения товаров в корзине на странице cart_page
+    cart_page = CartPage(driver) # Создает экземпляр родительского класса
+    cart_page.product_confirmation() # Вызывает его метод
+    time.sleep(3)
+    # Тест заполнения данными о клиенте
+    client_info_page = ClientInfoPage(driver) # Создает экземпляр родительского класса
+    client_info_page.input_client_information() # Вызывает его метод
+    time.sleep(3)
+    # Тест подтверждения оплаты
+    payment_page = PaymentPage(driver) # Создает экземпляр родительского класса
+    payment_page.click_button_finish()# Вызывает его метод
+    time.sleep(3)
+    # Тест скриншот
+    finish_page = FinishPage(driver)
+    finish_page.get_screenshot()
 
-    # # Тест выбора товара на странице main_page и добавления в корзину
-    # main_page = MainPage(driver) # Создает экземпляр родительского класса
-    # main_page.select_products_to_cart_1() # Вызывает его метод
-    #
-    # # Тест подтверждения товаров в корзине на странице cart_page
-    # cart_page = CartPage(driver) # Создает экземпляр родительского класса
-    # cart_page.product_confirmation() # Вызывает его метод
-    #
-    # # Тест заполнения данными о клиенте
-    # client_info_page = ClientInfoPage(driver) # Создает экземпляр родительского класса
-    # client_info_page.input_client_information() # Вызывает его метод
-
-
-#     # # Тест подтверждения оплаты
-#     # pp = PaymentPage(driver)
-#     # pp.click_button_finish()
-#     #
-#     # # Тест скриншот
-#     # fp = FinishPage(driver)
-#     # fp.get_screenshot()
-#
-#     print('Тест 1 завершен')
+    print('Тест 1 завершен')
 #     driver.quit()
 #

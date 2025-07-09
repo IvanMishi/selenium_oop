@@ -1,17 +1,18 @@
 import time  # Импорт модуля времени
-from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 from selenium.webdriver.common.by import By  # Импорт стратегий поиска
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-from Base.base_class import Base
-
-class PaymentPage(Base): # Наследование - класс потомок (вызвает методы родителя, драйвер)
-    """ Класс содержащий локаторы и методы для страницы оплаты товара"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
+from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
 
 
-    # Конструктор __init__
+from Base.base_class import Base # Импорт базового класса, от которого наследуются методы.
+class PaymentPage(Base): # Наследование - класс потомок (Вызвает методы родителя, драйвер)
+    """ Класс содержащий локаторы и методы для страницы оплаты товара"""
+
+
+# КОНСТРУКТОР __init__
     def __init__(self, driver):
-        super().__init__(driver) # Указывает, что это потомок класса
+        super().__init__(driver) # 'super' - указывает, что это потомок класса
         self.driver = driver
 
 
