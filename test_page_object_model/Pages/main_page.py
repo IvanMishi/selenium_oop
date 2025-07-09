@@ -8,10 +8,9 @@ from Base.base_class import Base
 class MainPage(Base): # Наследование - класс потомок (вызвает методы родителя, драйвер)
     """ Класс содержащий локаторы и методы для страницы 'Main'"""  # Для того, чтобы авторизоваться, нам необходимо выполнить три действия - ввести логин, ввести пароль, нажать кнопку "Войти".
 
-
-    # Конструктор __init__, в целом Мы можем его не использовать, так как сам driver у нас будет подтягиваться из теста, но он может понадобиться, на случай необходимости использовать новые переменные которые будут использоваться в разных классах.
+    # КОНСТРУКТОР __init__
     def __init__(self, driver):
-        super().__init__(driver) # Указывает, что это потомок класса
+        super().__init__(driver)  # 'super' - указывает, что это потомок класса
         self.driver = driver
 
 
@@ -21,6 +20,7 @@ class MainPage(Base): # Наследование - класс потомок (в
     select_product_3 = "add-to-cart-sauce-labs-bolt-t-shirt"  # Локатор  товара 3 на странице по ID
 
     button_shopping_cart  = "shopping_cart_link"  # Локатор кнопки для перехода в козину на странице по CLASS_NAME
+    button_checkout = "checkout"
 
     burger_menu = "//button[@id='react-burger-menu-btn']" # Локатор ,бургер меню на странице по ID
     link_about = "//a[@id='about_sidebar_link']" # Локатор , ссылки 'about' на странице в бургер меню по ID
@@ -37,6 +37,7 @@ class MainPage(Base): # Наследование - класс потомок (в
 
     def get_button_shopping_cart(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, self.button_shopping_cart))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
+
     def get_burger_menu(self):
         return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, self.burger_menu))) # Ищет кнопку перехода в корзину на странице по указанному локатору вне метода через self и возвращает его значение далее.
     def get_link_about(self):
@@ -60,6 +61,7 @@ class MainPage(Base): # Наследование - класс потомок (в
         self.get_button_shopping_cart().click()  # Вызывает метод на геттере через self и нажимает кнопку для перехода в корзину.
         print('Нажимает кнопку перехода в корзину')
 
+
     def click_get_burger_menu(self): #
         self.get_burger_menu().click()  # Вызывает метод на геттере через self и нажимает кнопку для перехода в корзину.
         print('Нажимает кнопку бургер-меню на сайте')
@@ -73,9 +75,9 @@ class MainPage(Base): # Наследование - класс потомок (в
     def select_products_to_cart_1(self):
         self.get_current_url()
         self.click_select_products_1()
-        self.click_button_shopping_cart() #
+        self.click_button_shopping_cart()
         self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
-        self.get_screenshot(element=self.get_select_products_1())
+        # self.get_screenshot(element=self.get_select_products_1())
         time.sleep(2)
 
     def select_products_to_cart_2(self):
