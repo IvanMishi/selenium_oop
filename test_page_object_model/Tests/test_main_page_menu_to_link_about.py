@@ -12,7 +12,7 @@ from Pages.finish_page import FinishPage
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
-from Tests.conftes import set_up
+from Tests.conftest import set_up
 
 
 # Тестовый сценарий перехода авторизованного пользователя по ссылке 'about' в 'бургер меню' на странице 'main_page'.
