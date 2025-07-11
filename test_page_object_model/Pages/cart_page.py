@@ -31,6 +31,7 @@ class CartPage(Base):
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def product_confirmation(self): # Подтверждение товара
         self.get_current_url()
+        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
         self.click_checkout_button()
-        self.assert_word(self.get_title_value(), 'Checkout: Your Information')  # Убеждается, что переход на страницу выполнен
+
 

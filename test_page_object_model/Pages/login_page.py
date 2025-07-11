@@ -49,10 +49,8 @@ class LoginPage(Base): # Наследование методов от Base
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def authorization_user(self):
         self.driver.get(self.url) # Вызывает метод открытия URL # Стандартный вызов - не через conftest
-        # self.get_current_url() #Вызов метода для вывода URL из класса родителя Base.
+        self.get_current_url()
         self.input_username('standard_user')# Вызов действия ввода данных о логине стандартного пользователя.
         self.input_password('secret_sauce')  # Вызов действия ввода данных пароля для стандартного пользователя.
         self.click_login_button() # Вызов действия нажатия на кнопку авторизации на сайте.
-        self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
-        self.get_screenshot(element=self.get_title_value())
         print('Авторизован')

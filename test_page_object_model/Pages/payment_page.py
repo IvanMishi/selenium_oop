@@ -10,9 +10,9 @@ class PaymentPage(Base): # Наследование - класс потомок 
     """ Класс содержащий локаторы и методы для страницы оплаты товара"""
 
 
-# КОНСТРУКТОР __init__
+# Конструктор __init__
     def __init__(self, driver):
-        super().__init__(driver) # 'super' - указывает, что это потомок класса
+        super().__init__(driver)  # Указывает, что это потомок класса.
         self.driver = driver
 
 
@@ -35,6 +35,7 @@ class PaymentPage(Base): # Наследование - класс потомок 
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def select_product(self):
         self.get_current_url()
+        self.assert_word(self.get_title_value(), 'Checkout: Overview')  # Убеждается, что переход на страницу выполнен
         self.click_button_finish() # Нажимает кнопку подтверждения оплаты товара.
-        self.assert_word(self.get_title_value(), 'Checkout: Complete!')  # Убеждается, что переход на страницу выполнен
+
 
