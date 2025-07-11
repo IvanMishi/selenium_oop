@@ -1,23 +1,21 @@
 import time  # Модуль для работы с функцией ожидания
 from selenium import webdriver  # Модуль для взаимодействия с веб-браузерами
 
-
 import pytest
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
 from Pages.cart_page import CartPage
-
 from Pages.client_Info_page import ClientInfoPage
 from Pages.finish_page import FinishPage
-
-
 from Pages.payment_page import PaymentPage
 from Tests.conftest import set_up
 
+# Для запуска всех тестов из директории Tests использует python -m pytest -s -v
+# Для запуска теста из директории Tests использует python -m pytest -s -v test_buy_products.py
+# Для запуска тестового метода из теста test_buy_products.py из директории Tests использует python -m pytest -s -v -k test_buy_products_1
 
-
-@pytest.mark.run(order=3) # Маркировка очередности запуска теста Фикстура ((Запустится третьим))
-def test_buy_products_1(set_up):
+@pytest.mark.run(order=3) # Фикстура: Маркировка очередности запуска теста  ((Запустится третьим))
+def test_buy_products_1(set_up): # Тест выбора продукта по сценарию в тестовом методе и покупки его
     print('Тест выбора и покупки продукта 1 запущен')
     # driver = webdriver.Chrome() # Запускает драйвер по дефолту
     driver = set_up # Запускает драйвер через conftest
@@ -39,15 +37,15 @@ def test_buy_products_1(set_up):
     time.sleep(3)
     # Тест подтверждения оплаты
     payment_page = PaymentPage(driver) # Создает экземпляр родительского класса
-    payment_page.click_button_finish()# Вызывает его метод
+    payment_page.click_button_finish()# Вызывает отдельную функцию из метода
     time.sleep(3)
     # Тест скриншот
-    finish_page = FinishPage(driver)
-    finish_page.get_screenshot()
+    finish_page = FinishPage(driver) # Создает экземпляр родительского класса
+    finish_page.get_screenshot() # Вызывает отдельную функцию из метода
     print('Тест 1 завершен')
+#     driver.quit() # Закрывает  браузер по дефолту
 
-
-@pytest.mark.run(order=2) # Маркировка очередности запуска теста Фикстура ((Запустится вторым))
+@pytest.mark.run(order=2) # Фикстура: Маркировка очередности запуска теста Фикстура ((Запустится вторым))
 def test_buy_products_2(set_up):
     print('Тест выбора и покупки продукта 2 запущен')
     # driver = webdriver.Chrome() # Запускает драйвер по дефолту
@@ -76,8 +74,9 @@ def test_buy_products_2(set_up):
     finish_page = FinishPage(driver)
     finish_page.get_screenshot()
     print('Тест 2 завершен')
+#     driver.quit() # Закрывает  браузер по дефолту
 
-@pytest.mark.run(order=1) # Маркировка очередности запуска теста Фикстура ((Запустится первым))
+@pytest.mark.run(order=1) # Фикстура: Маркировка очередности запуска теста Фикстура ((Запустится первым))
 def test_buy_products_3(set_up):
     print('Тест выбора и покупки продукта 3 запущен')
     # driver = webdriver.Chrome() # Запускает драйвер по дефолту
@@ -106,6 +105,5 @@ def test_buy_products_3(set_up):
     finish_page = FinishPage(driver)
     finish_page.get_screenshot()
     print('Тест 3 завершен')
+#     driver.quit() # Закрывает  браузер по дефолту
 
-#     driver.quit()
-#

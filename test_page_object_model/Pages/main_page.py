@@ -74,33 +74,35 @@ class MainPage(Base): # Наследование - класс потомок (в
     # Метод для выбора продуктов
     def select_products_to_cart_1(self):
         self.get_current_url()
+        self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_title_value())
         self.click_select_products_1()
         self.click_button_shopping_cart()
-        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
-        # self.get_screenshot(element=self.get_select_products_1())
-        time.sleep(2)
+        time.sleep(1) # Ждет 1 сек
 
     def select_products_to_cart_2(self):
         self.get_current_url()
+        self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_title_value())
         self.click_select_products_2()
-        self.click_button_shopping_cart() #
-        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
-        self.get_screenshot(element=self.get_select_products_2())
-        time.sleep(2)
+        self.click_button_shopping_cart()
+        time.sleep(1) # Ждет 1 сек
 
     def select_products_to_cart_3(self):
         self.get_current_url()
+        self.assert_word(self.get_title_value(),'Products' ) # Убеждается, что переход на страницу выполнен
+        self.get_screenshot(element=self.get_title_value())
         self.click_select_products_3()
-        self.click_button_shopping_cart() #
-        self.assert_word(self.get_title_value(), 'Your Cart')  # Убеждается, что переход на страницу выполнен
-        self.get_screenshot(element=self.get_select_products_3())
-        time.sleep(2)
+        self.click_button_shopping_cart()
+        time.sleep(1) # Ждет 1 сек
+
 
     # Метод для перехода по ссылке 'about' в 'бургер меню' на странице 'main_page'
     def select_menu_about(self):
         self.get_current_url()
         self.click_get_burger_menu() # Нажимает на 'бургер меню'
-        time.sleep(3) # Ждет 3 сек
+        time.sleep(1) # Ждет 1 сек
         self.click_link_about() # Нажимает на ссылку 'about' и переходит по ней
         self.assert_url('https://saucelabs.com/') # Убеждается, что переход выполнен
+
         time.sleep(3) # Ждет 3 сек

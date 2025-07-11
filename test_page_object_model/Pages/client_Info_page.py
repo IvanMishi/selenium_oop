@@ -53,9 +53,10 @@ class ClientInfoPage(Base): # Наследование - класс потомо
 # МЕТОДЫ. (Метод, содержащий список ДЕИИСТВИЙ, как шагов.)
     def input_client_information(self):
         self.get_current_url()
+        self.assert_word(self.get_title_value(), 'Checkout: Your Information')  # Убеждается, что переход на страницу выполнен
         self.input_first_name(self.fake.first_name())
         self.input_last_name(self.fake.last_name())
         self.input_postal_code(self.fake.port_number())
         self.click_button_continue()
-        self.assert_word(self.get_title_value(), 'Checkout: Overview')  # Убеждается, что переход на страницу выполнен
+
 
