@@ -1,22 +1,27 @@
-import time
+import time  # Модуль для работы с функцией ожидания
 from selenium import webdriver  # Модуль для взаимодействия с веб-браузерами
 from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
 from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-
 import pytest
 
 
-@pytest.fixture()
-def set_up(): # Передается в аргументы при запуске теста.
-    print("\nЗапуск фикстуры до выполнения теста")    #перед тестом
-    driver = webdriver.Chrome()
-    url = 'https://www.saucedemo.com/'  # Обращение к URL из той страницы на которой она находится
-    driver.get(url)
-    WebDriverWait(driver, 60).until(EC.url_to_be(url)) # Ждет загрузку сайта
-    driver.maximize_window() # Указывает на локатор вне метода через self.
-    time.sleep(5)
+@pytest.fixture() # Декоратор для объявления функции как фикстуры pytest
+def set_up(): # Передается в аргументы при запуске теста в классе наследнике.
+    """
+        Фикстура для инициализации и завершения работы веб-драйвера.
+        Выполняется перед каждым тестом, где используется.
+        Возвращает экземпляр веб-драйвера для использования в тестах.
+        """
 
-    yield driver    # Разделяет код на до/после теста
+    print("\nЗапуск фикстуры до выполнения теста") # Выполнение кода перед тестом.
+    driver = webdriver.Chrome()  # Создаёт экземпляр драйвера Chrome
+    url = 'https://www.saucedemo.com/'  # URL тестируемой страницы
+    driver.get(url) # Переходит по ссылке.
+    WebDriverWait(driver, 60).until(EC.url_to_be(url)) # Ожидание полной загрузки страницы (проверка соответствия URL)
+    driver.maximize_window() # Максимизация окна браузера
 
-    print("\nТест завершен, запуск фикстуры после выполнения теста!")    #после теста
-    driver.quit()
+    yield driver # Передача управления тесту, разделяет код на до/после теста
+
+    print("\nТест завершен, запуск фикстуры после выполнения теста!")# Выполнение кода после теста.
+    time.sleep(.5)
+    driver.quit() # Закрытие браузера и освобождение ресурсов
