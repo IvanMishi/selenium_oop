@@ -1,14 +1,16 @@
 import time  # Модуль для работы с функцией ожидания
 from selenium import webdriver  # Модуль для взаимодействия с веб-браузерами
-
 import pytest
-from Pages.login_page import LoginPage
-from Pages.main_page import MainPage
+
+# Импорт классов страниц и базового класса
+from Base.base_class import Base
 from Pages.cart_page import CartPage
 from Pages.client_Info_page import ClientInfoPage
 from Pages.finish_page import FinishPage
+from Pages.login_page import LoginPage
+from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
-from Tests.conftest import set_up
+from Tests.conftest import set_up  # Импорт фикстуры из conftest
 
 # Для запуска всех тестов из директории Tests использует python -m pytest -s -v
 # Для запуска теста из директории Tests использует python -m pytest -s -v test_buy_products.py

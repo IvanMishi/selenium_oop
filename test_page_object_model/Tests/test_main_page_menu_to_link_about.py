@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait  # Модуль для �
 from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
 import pytest
 
+# Импорт классов страниц и базового класса
 from Base.base_class import Base
 from Pages.cart_page import CartPage
 from Pages.client_Info_page import ClientInfoPage
@@ -12,13 +13,23 @@ from Pages.finish_page import FinishPage
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
 from Pages.payment_page import PaymentPage
-from Tests.conftest import set_up
+from Tests.conftest import set_up  # Импорт фикстуры из conftest
 
 
-# Тестовый сценарий перехода авторизованного пользователя по ссылке 'about' в 'бургер меню' на странице 'main_page'.
-# для запуска теста из директории Tests использует python -m pytest -s -v test_main_page_menu_to_link_about.py
-def test_main_page_menu_to_link_about(): #Тест запускается дефолтно, без использования conftest.
-    driver = webdriver.Chrome()
+
+# Для запуска теста из директории Tests используйте команду:
+# python -m pytest -s -v test_main_page_menu_to_link_about.py
+def test_main_page_menu_to_link_about(): #Тест запускается дефолтно, без использования фикстуры conftest в параметры теста.
+    """
+        Тест проверяет переход по ссылке 'About' в бургер-меню после авторизации
+        Шаги:
+        1. Авторизация пользователя
+        2. Открытие бургер-меню
+        3. Переход по ссылке 'About'
+        4. Проверка перехода на целевую страницу
+        """
+
+    driver = webdriver.Chrome() # Создает экземпляр драйвера.
 
     # Тест авторизации на сайте на странице login_page
     login_page = LoginPage(driver) # Создает экземпляр родительского класса
