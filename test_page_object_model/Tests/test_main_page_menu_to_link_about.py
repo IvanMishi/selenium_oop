@@ -12,9 +12,6 @@ from Pages.client_Info_page import ClientInfoPage
 from Pages.finish_page import FinishPage
 from Pages.login_page import LoginPage
 from Pages.main_page import MainPage
-from Pages.payment_page import PaymentPage
-from Tests.conftest import set_up  # Импорт фикстуры из conftest
-
 
 
 # Для запуска теста из директории Tests используйте команду:
