@@ -1,11 +1,10 @@
-import time  # Импорт модуля времени
-from selenium.common.exceptions import NoSuchElementException  # Импорт исключения
-from selenium.webdriver.common.by import By  # Импорт стратегий поиска
-from selenium.webdriver.support.ui import WebDriverWait  # Импорт явного ожидания
-from selenium.webdriver.support import expected_conditions as EC  # Импорт условий ожидания
-from setuptools.package_index import user_agent
+import time  # Модуль для работы с функцией ожидания
+from selenium.webdriver.common.by import By  # Модуль для определения способов поиска элементов на странице
+from selenium.webdriver.support.ui import WebDriverWait  # Модуль для реализации явно-ожидаемых условий
+from selenium.webdriver.support import expected_conditions as EC  # Модуль для работы с ожидаемыми условиями
+from setuptools.package_index import user_agent #
 
-from Base.base_class import Base
+from Base.base_class import Base #
 
 
 class LoginPage(Base): # Наследование методов от Base
